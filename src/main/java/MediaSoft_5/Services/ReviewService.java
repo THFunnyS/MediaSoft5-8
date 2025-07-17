@@ -1,6 +1,9 @@
 package MediaSoft_5.Services;
 
+import MediaSoft_5.DTO.ReviewRequestDTO;
+import MediaSoft_5.DTO.ReviewResponseDTO;
 import MediaSoft_5.Entity.Review;
+import MediaSoft_5.Mapper.ReviewMapper;
 import MediaSoft_5.Repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,14 +16,14 @@ import java.util.List;
 public class ReviewService {
     private final ReviewRepository repo;
     private final RestaurantService restaurantService;
+    private final ReviewMapper mapper;
 
-    public void save(Review r) {
-        repo.save(r);
-        updateRestaurantRating(r.getRestaurantId());
+    public void save(ReviewRequestDTO dto) {
+        repo.save(mapper.toEntity(dto));
+        updateRestaurantRating(dto.restaurantId());
     }
 
-    public void remove(Review r) { repo.remove(r); }
-    public List<Review> findAll() { return repo.findAll(); }
+    public List<ReviewResponseDTO> findAll() { return repo.findAll().stream().map(mapper::toDTO).toList(); }
 
     private void updateRestaurantRating(Long restaurantId) {
         List<Review> reviews = repo.findByRestaurantId(restaurantId);

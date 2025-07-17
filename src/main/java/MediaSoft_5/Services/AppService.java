@@ -1,9 +1,9 @@
 package MediaSoft_5.Services;
 
 import MediaSoft_5.CuisineType;
-import MediaSoft_5.Entity.Restaurant;
-import MediaSoft_5.Entity.Review;
-import MediaSoft_5.Entity.Visitor;
+import MediaSoft_5.DTO.RestaurantRequestDTO;
+import MediaSoft_5.DTO.ReviewRequestDTO;
+import MediaSoft_5.DTO.VisitorRequestDTO;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,18 +18,16 @@ public class AppService {
     private final RestaurantService restaurantService;
     private final ReviewService reviewService;
 
-    private final AtomicLong idGen = new AtomicLong();
-
     @PostConstruct
     public void init() {
-        visitorService.save(new Visitor(idGen.incrementAndGet(), (String) null, 25, "M"));
-        visitorService.save(new Visitor(idGen.incrementAndGet(), "Anna", 30, "F"));
+        visitorService.save(new VisitorRequestDTO((String) null, 25, "M"));
+        visitorService.save(new VisitorRequestDTO("Anna", 30, "F"));
 
-        restaurantService.save(new Restaurant(idGen.incrementAndGet(), "Pizza Italia", "Best Italian pizza", CuisineType.ITALIAN, BigDecimal.valueOf(800), BigDecimal.ZERO));
-        restaurantService.save(new Restaurant(idGen.incrementAndGet(), "Sushi House", "Fresh sushi and rolls", CuisineType.JAPANESE, BigDecimal.valueOf(1000), BigDecimal.ZERO));
+        restaurantService.save(new RestaurantRequestDTO( "Pizza Italia", "Best Italian pizza", CuisineType.ITALIAN, BigDecimal.valueOf(800), BigDecimal.ZERO));
+        restaurantService.save(new RestaurantRequestDTO("Sushi House", "Fresh sushi and rolls", CuisineType.JAPANESE, BigDecimal.valueOf(1000), BigDecimal.ZERO));
 
-        reviewService.save(new Review(1L, 3L, 5, "Amazing!"));
-        reviewService.save(new Review(2L, 3L, 4, "Tasty but a bit expensive."));
+        reviewService.save(new ReviewRequestDTO(1L, 3L, 5, "Amazing!"));
+        reviewService.save(new ReviewRequestDTO(2L, 3L, 4, "Tasty but a bit expensive."));
     }
 
     public void test() {
