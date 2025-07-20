@@ -5,6 +5,8 @@ import MediaSoft_5.DTO.ReviewResponseDTO;
 import MediaSoft_5.Services.ReviewService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,13 +17,13 @@ import java.util.List;
 public class ReviewController {
     private final ReviewService service;
 
-    @PostMapping
-    public void create(@RequestBody @Valid ReviewRequestDTO dto){
-        service.save(dto);
-    }
-
-    @GetMapping
-    public List<ReviewResponseDTO> getAll(){
-        return service.findAll();
+    @GetMapping("/paged")
+    public Page<ReviewResponseDTO> getPagedReviews(
+            @RequestParam Long restaurantId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "DESC") Sort.Direction sort
+    ) {
+        return service.findPaged(restaurantId, page, size, sort);
     }
 }

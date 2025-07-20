@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 @RequiredArgsConstructor
@@ -26,8 +25,8 @@ public class AppService {
         restaurantService.save(new RestaurantRequestDTO( "Pizza Italia", "Best Italian pizza", CuisineType.ITALIAN, BigDecimal.valueOf(800), BigDecimal.ZERO));
         restaurantService.save(new RestaurantRequestDTO("Sushi House", "Fresh sushi and rolls", CuisineType.JAPANESE, BigDecimal.valueOf(1000), BigDecimal.ZERO));
 
-        reviewService.save(new ReviewRequestDTO(1L, 3L, 5, "Amazing!"));
-        reviewService.save(new ReviewRequestDTO(2L, 3L, 4, "Tasty but a bit expensive."));
+        reviewService.save(new ReviewRequestDTO(1L, 1L, 5, "Amazing!"));
+        reviewService.save(new ReviewRequestDTO(2L, 2L, 4, "Tasty but a bit expensive."));
     }
 
     public void test() {

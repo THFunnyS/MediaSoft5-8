@@ -19,4 +19,12 @@ public class VisitorService {
     public void save(VisitorRequestDTO dto) { repo.save(mapper.toEntity(dto)); }
 
     public List<VisitorResponseDTO> findAll() { return repo.findAll().stream().map(mapper::toDTO).toList(); }
+
+    public VisitorResponseDTO findById(Long id) {
+        return repo.findById(id).map(mapper::toDTO).orElseThrow();
+    }
+
+    public void delete(Long id) {
+        repo.deleteById(id);
+    }
 }

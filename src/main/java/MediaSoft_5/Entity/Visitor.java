@@ -1,15 +1,22 @@
-package MediaSoft_5.Entity;
+    package MediaSoft_5.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+    import jakarta.persistence.Entity;
+    import jakarta.persistence.GeneratedValue;
+    import jakarta.persistence.GenerationType;
+    import jakarta.persistence.Id;
+    import lombok.AllArgsConstructor;
+    import lombok.Data;
+    import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Visitor {
-    private Long id;
-    private String name;
-    private int age;
-    private String gender;
-}
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Entity
+    public class Visitor {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+        private String name;
+        private int age;
+        private String gender;
+    }

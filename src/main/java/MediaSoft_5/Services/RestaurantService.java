@@ -20,13 +20,24 @@ public class RestaurantService {
     public void save(RestaurantRequestDTO dto) { repo.save(mapper.toEntity(dto)); }
     public List<RestaurantResponseDTO> findAll() { return repo.findAll().stream().map(mapper::toDTO).toList(); }
 
+    public RestaurantResponseDTO findById(Long id) {
+        return repo.findById(id)
+                .map(mapper::toDTO)
+                .orElseThrow(() -> new RuntimeException("Restaurant not found"));
+    }
+
+    public void delete(Long id) {
+        repo.deleteById(id);
+    }
+
     public void updateRating(Long restaurantId, BigDecimal newRating) {
-        List<Restaurant> all = repo.findAll();
-        for (Restaurant r : all) {
-            if (restaurantId.equals(r.getId())) {
-                r.setUserRating(newRating);
-                break;
-            }
-        }
+        Restaurant restaurant = repo.findById(restaurantId)
+                .orElseThrow(() -> new RuntimeException("Restaurant not found"));
+        restaurant.setUserRating(newRating);
+        repo.save(restaurant);
+    }
+
+    public List<Restaurant> findWithRatingAbove(BigDecimal rating) {
+        return repo.findByUserRatingGreaterThanEqual(rating);
     }
 }

@@ -24,4 +24,9 @@ public class VisitorController {
     public List<VisitorResponseDTO> getAll(){
         return service.findAll();
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
 }

@@ -1,16 +1,18 @@
 package MediaSoft_5.Repository;
 
 import MediaSoft_5.Entity.Restaurant;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
-public class RestaurantRepository {
-    private final List<Restaurant> data = new ArrayList<>();
+public interface RestaurantRepository extends JpaRepository<Restaurant,Long> {
+    List<Restaurant> findByUserRatingGreaterThanEqual(BigDecimal minRating);
 
-    public void save(Restaurant r) { data.add(r); }
-    public void remove(Restaurant r) { data.remove(r); }
-    public List<Restaurant> findAll() { return List.copyOf(data); }
+    //@Query("SELECT r FROM Restaurant r WHERE r.userRating >= :minRating")
+    //List<Restaurant> findRatedAbove(@Param("minRating") BigDecimal minRating);
 }
