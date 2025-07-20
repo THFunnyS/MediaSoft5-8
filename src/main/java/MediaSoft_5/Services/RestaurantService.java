@@ -27,7 +27,13 @@ public class RestaurantService {
     }
 
     public void delete(Long id) {
-        repo.deleteById(id);
+        Restaurant restaurant = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Restaurant not found"));
+
+        if (restaurant.getReviews() != null) {
+            restaurant.getReviews().clear();
+        }
+        repo.delete(restaurant);
     }
 
     public void updateRating(Long restaurantId, BigDecimal newRating) {

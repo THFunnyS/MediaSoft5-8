@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class ReviewId implements Serializable {
-    @Id
+
     private Long visitorId;
-    @Id
+
     private Long restaurantId;
 
     public ReviewId() {}

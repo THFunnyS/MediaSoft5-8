@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,4 +23,6 @@ public class Restaurant {
     private CuisineType cuisineType;
     private BigDecimal averageBill;
     private BigDecimal userRating = BigDecimal.ZERO;
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews;
 }

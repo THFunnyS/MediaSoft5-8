@@ -10,4 +10,4 @@ import java.math.BigDecimal;
 public record RestaurantRequestDTO(@NotBlank String name,
                                    @NotBlank String description,
                                    @NotNull CuisineType cuisineType,
-                                   @DecimalMin("0.0") BigDecimal averageBill, BigDecimal zero) {    }
+                                   @DecimalMin("0.0") BigDecimal averageBill) {    }

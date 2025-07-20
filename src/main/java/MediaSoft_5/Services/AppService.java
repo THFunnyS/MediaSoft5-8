@@ -22,8 +22,8 @@ public class AppService {
         visitorService.save(new VisitorRequestDTO((String) null, 25, "M"));
         visitorService.save(new VisitorRequestDTO("Anna", 30, "F"));
 
-        restaurantService.save(new RestaurantRequestDTO( "Pizza Italia", "Best Italian pizza", CuisineType.ITALIAN, BigDecimal.valueOf(800), BigDecimal.ZERO));
-        restaurantService.save(new RestaurantRequestDTO("Sushi House", "Fresh sushi and rolls", CuisineType.JAPANESE, BigDecimal.valueOf(1000), BigDecimal.ZERO));
+        restaurantService.save(new RestaurantRequestDTO( "Pizza Italia", "Best Italian pizza", CuisineType.ITALIAN, BigDecimal.valueOf(800)));
+        restaurantService.save(new RestaurantRequestDTO("Sushi House", "Fresh sushi and rolls", CuisineType.JAPANESE, BigDecimal.valueOf(1000)));
 
         reviewService.save(new ReviewRequestDTO(1L, 1L, 5, "Amazing!"));
         reviewService.save(new ReviewRequestDTO(2L, 2L, 4, "Tasty but a bit expensive."));
